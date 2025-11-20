@@ -1,0 +1,18 @@
+project_name: licitai
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  models: models/
+gcs:
+  bucket: licitai-data-dev
+mlflow:
+  tracking_uri: ${env:MLFLOW_TRACKING_URI}
+  experiment_name: licitai/baseline
+model:
+  model:
+    name: bm25
+    k1: 1.5
+    b: 0.75
+    min_df: 5
+    max_df: 0.9

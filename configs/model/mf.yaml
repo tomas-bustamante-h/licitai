@@ -1,0 +1,5 @@
+model:
+  name: mf
+  factors: 128
+  regularization: 0.05
+  iterations: 20
