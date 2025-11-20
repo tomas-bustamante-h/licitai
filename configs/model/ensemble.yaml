@@ -1,0 +1,4 @@
+model:
+  name: ensemble
+  w_bm25: 0.6
+  w_mf: 0.4

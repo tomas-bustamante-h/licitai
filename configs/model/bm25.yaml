@@ -1,0 +1,6 @@
+model:
+  name: bm25
+  k1: 1.5
+  b: 0.75
+  min_df: 5
+  max_df: 0.9

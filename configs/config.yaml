@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+  - paths
+  - gcs
+  - mlflow
+  - model: bm25
+
+project_name: licitai

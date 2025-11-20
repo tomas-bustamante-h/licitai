@@ -29,21 +29,21 @@ clean:
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	ruff format --check
-	ruff check
+	poetry run ruff format --check
+	poetry run ruff check
 
 ## Format source code with ruff
 .PHONY: format
 format:
-	ruff check --fix
-	ruff format
+	poetry run ruff check --fix
+	poetry run ruff format
 
 
 
 ## Run tests
 .PHONY: test
 test:
-	python -m pytest tests
+	poetry run pytest tests
 ## Download Data from storage system
 .PHONY: sync_data_down
 sync_data_down:
@@ -73,7 +73,35 @@ create_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
+## Ejecutar ingesta completa (full) usando Hydra
+.PHONY: ingest
+ingest:
+	poetry run python licitai/etl/ingest.py etl.mode=full
 
+## Entrenar baseline BM25 y loggear en MLflow
+.PHONY: train-bm25
+train-bm25:
+	poetry run python licitai/models/train_bm25.py model=bm25
+
+## Entrenar baseline MF (ALS / implicit)
+.PHONY: train-mf
+train-mf:
+	poetry run python licitai/models/train_mf.py model=mf
+
+## Entrenar ensemble BM25 + MF
+.PHONY: train-ensemble
+train-ensemble:
+	poetry run python licitai/models/train_ensemble.py model=ensemble
+
+## Ejecutar todos los hooks de pre-commit en todos los archivos
+.PHONY: pre-commit
+pre-commit:
+	poetry run pre-commit run --all-files
+
+## Renderizar la tesis en Quarto
+.PHONY: tesis
+tesis:
+	poetry run quarto render docs/tesis.qmd
 
 #################################################################################
 # Self Documenting Commands                                                     #
